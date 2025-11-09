@@ -1,0 +1,55 @@
+{
+  wayland.windowManager.hyprland.settings = {
+	  animations = {
+      enabled = true;
+      workspace_wraparound = true;
+  
+
+      # ─────────────────────────────────────────────
+      # ─── Bézier Curves (named and organized) ─────
+      # ─────────────────────────────────────────────
+      bezier = [
+        "bounce, 0.68, -0.55, 0.27, 1.55"          # pronounced bounce
+        "dramatic, 0.7, -0.3, 0.3, 1.4"            # cinematic swing
+        "easeIn, 0.42, 0, 1, 1"                    # soft entry
+        "easeOut, 0, 0, 0.58, 1"                   # soft exit
+        "elastic, 0.42, -0.2, 0.58, 1.4"           # soft spring motion
+        "linear, 0, 0, 1, 1"                       # fallback
+        "overshot, 0.65, -0.15, 0.35, 1.15"        # elastic bounce (main)
+        "smooth, 0.42, 0, 0.58, 1"                 # classic smooth
+        "swift, 0.8, 0, 0.2, 1"                    # fast/snappy transitions
+      ];
+   
+      # ─────────────────────────────────────────────
+      # ─── Animation Rules (grouped by Hyprland doc)
+      # ─────────────────────────────────────────────
+      animation = [
+   
+        # ─── GLOBAL ──────────────────────────────────────────────
+        "windows, 1, 5, overshot, slide"           # entering windows glide
+        "windowsMove, 1, 5, smooth, slide"         # smooth reposition
+        "windowsOut, 1, 4, smooth, fade"           # fade-out window exit
+        "windowsResize, 1, 5, smooth, slide"       # resizing smoothness
+   
+        # ─── LAYERS ──────────────────────────────────────────────
+        "fade, 1, 6, easeIn, fade"                 # overlay fade
+        "popup, 1, 6, smooth, fade"                # popup entry
+        "tooltip, 1, 6, easeOut, fade"             # tooltip exit
+   
+        # ─── BORDER ──────────────────────────────────────────────
+        "border, 1, 3, swift, fade"                # focus border color fade
+        "borderangle, 1, 5, overshot, rotate"      # subtle border spin accent
+   
+        # ─── WORKSPACES ──────────────────────────────────────────
+        "specialWorkspace, 1, 7, overshot, fade"   # floating/special spaces
+        "workspaceZoom, 0, 6, overshot, zoom"      # off for Nouveau; safe for Mesa
+        "workspaces, 1, 5, overshot, slidefade"      # desktop transition
+   
+        # ─── ZOOM FACTOR ─────────────────────────────────────────
+        "fullscreen, 1, 5, easeOut, fade"          # fullscreen fade-in
+        "zoomFactor, 1, 5, easeIn, zoom"           # subtle depth animation
+      ];
+    };
+  };
+}
+

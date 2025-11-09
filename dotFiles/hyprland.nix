@@ -13,7 +13,7 @@
     hyprland = {
       enable = true;
       withUWSM = true;
-      xwayland.enable = true;
+      xwayland.enable = false;
       package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
       portalPackage = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
       #extraConfig = ''
@@ -22,26 +22,20 @@
   };
 
   environment = {
-    systemPackages = with pkgs; [
-      pkgs.eww
-      pkgs.kitty
-      pkgs.grimblast
-      pkgs.hyprcursor
-      pkgs.hypridle
-      pkgs.hyprland-qt-support
-      pkgs.hyprlock
-      pkgs.hyprpolkitagent
-      pkgs.swww
-      pkgs.waybar
-      pkgs.wl-clipboard
-    ];
-
     sessionVariables = {
       SDL_VIDEO_DRIVER = "wayland";
-      WLR_DRM_DEVICES = "/dev/dri/card0";
-      WLR_NO_HARDWARE_CURSORS = "1";
       NIXOS_OZONE_WL = "1";
     };
+
+    etc."hypr/hyprland.conf".text = ''
+      # Monitor Session
+      # Enable when using Official Nvidia Driver as it has trouble detecting proper monitors
+      #monitor = Unknown-1,disable
+      monitor = desc:Microstep MSI MP273Q E2 PB6H485300387,2560x1440@60,2560x0,1
+      monitor = desc:Microstep MSI MP273Q E2 PB6H485300388,2560x1440@60,0x0,1
+      # FallBack Rule
+      monitor= , preferredd, auto, 1
+    ''; 
   };
 
   services = {
@@ -53,8 +47,8 @@
   };
   security = {
     polkit.enable = true;
-#    pam.services = {
-#      hyprlock = {};
-#    };
+    pam.services = {
+      hyprlock = {};
+    };
   };
 }

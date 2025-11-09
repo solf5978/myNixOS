@@ -1,0 +1,59 @@
+
+Hello, 
+
+I am using nixCats-nvim, for further reference if you need (https://deepwiki.com/BirdeeHub/nixCats-nvim), to build my neovim setup ( using home-manager ) , as the template of home-manager has one init.lua, I would like to move beyond that by separate the init.lua into different lua(s), with folder coreLua and pluginLua, here is my setup, 
+
+- / ( lived an init.lua )
+---/coreLua
+---/coreLua/ ( also lived an init.lua and others ( autoCommand, ColorSchema, nvimOptions, keyMapping )  where the packages my startupPlugin + part of optionalPlugins that categorized as generalUsage will be using )
+and for the options, and keybind, I will be using this ( https://github.com/BirdeeHub/nixCats-nvim/blob/main/templates/home-manager/init.lua ) as a foundation, as this is kinda of golden sample from other masters'
+
+---/pluginLua
+---/pluginLua ( also lived an init.lua and others ( langLinter, langFormatter, treeSitter, teleScope, debugHelper, lspRuntime ) where the optionalPlugins and lspRuntimeddep will be using ) 
+
+and here is my package name [ generalUsage, goDev, rsDev, tsDev ] using when there is a line say enabled = nixCats("packagename") for example -> enabled = nixCats('generalUsage') or false, you can refer this repo ( https://github.com/BirdeeHub/nixCats-nvim/tree/main/templates/example/lua/ ) 
+
+
+
+And let's do the lua config of the listed package one by one, you can combine the lua file together, I can do it later too,  first, go with the startupPlugin, then optionalPlugins and lspRuntimeDeps, 
+here is my startupPlugins.nix
+
+ 15   │             colorScheme = [
+  16   │               everforest-nvim    # “Everforest” soft green theme for Neovim       # https://github.com/neanias/everforest-nvim
+  17   │               gruvbox.nvim       # “Gruvbox” retro contrast theme for Neovim     # https://github.com/ellisonleao/gruvbox.nvim
+  18   │               kanagawa.nvim      # “Kanagawa” inspired theme for Neovim          # https://github.com/rebelot/kanagawa.nvim
+  19   │               melange-nvim       # “Melange” warm pastel theme for Neovim        # https://github.com/savq/melange-nvim
+  20   │               neovim-ayu         # “Ayu” colour‑theme for Neovim                 # https://github.com/Shatur/neovim-ayu
+  21   │             ];
+  22   │             # Base LSP / schemas / snippets
+  23   │             baseSchema = [
+  24   │               friendly-snippets  # Predefined snippets collection                  # https://github.com/rafamadriz/friendly-snippets
+  25   │               SchemaStore-nvim   # JSON schemas for Neovim                         # https://github.com/b0o/SchemaStore.nvim
+  26   │             ];
+  27   │             # Base utilities & early plugins
+  28   │             baseUtil = [
+  29   │               ddressing-nvim     # utility library                                 # https://github.com/BirdeeHub/ddressing.nvim
+  30   │               lualine-lsp-progress # LSP progress indicator for lualine            # https://github.com/arkav/lualine-lsp-progress
+  31   │               lualine-nvim       # Fast, customizable statusline                    # https://github.com/nvim-lualine/lualine.nvim
+  32   │               mini-nvim          # Modular Lua utilities collection                 # https://github.com/echasnovski/mini.nvim
+  33   │               nvim-autopairs     # Automatically insert and manage matching pairs   # https://github.com/windwp/nvim-autopairs
+  34   │               nvim-illuminate    # Highlight other occurrences of word under cursor # https://github.com/RRethy/vim-illuminate
+  35   │               nvim-nio           # helper library                                   # https://github.com/BirdeeHub/nvim-nio
+  36   │               nvim-ts-autotag    # Automatically close/rename HTML/JSX tags        # https://github.com/windwp/nvim-ts-autotag
+  37   │               nvim-treesitter    # Core Treesitter plugin with parsers             # https://github.com/nvim-treesitter/nvim-treesitter
+  38   │               nvim-treesitter-textobjects # Provides text objects via Treesitter   # https://github.com/nvim-treesitter/nvim-treesitter-textobjects
+  39   │               nvim-ts-context-commentstring # Dynamic comment string based on context  # https://github.com/JoosepAlviste/nvim-ts-context-commentstring
+  40   │               nvim-web-devicons  # File icons for Neovim                             # https://github.com/nvim-tree/nvim-web-devicons
+  41   │               nui-nvim           # UI component library                             # https://github.com/MunifTanjim/nui.nvim
+  42   │               plenary-nvim       # Lua utility library                               # https://github.com/nvim-lua/plenary.nvim
+  43   │               rainbow-delimiters-nvim # Highlight nested parentheses/brackets      # https://github.com/HiPhish/rainbow-delimiters.nvim
+  44   │               snacks-nvim        # Small QoL modules for Neovim                     # https://github.com/folke/snacks.nvim
+  45   │               ts-comments-nvim   # Smarter comment handling for TypeScript/TSX    # https://github.com/folke/ts-comments.nvim
+  46   │               vim-matchup        # Enhanced % motion and delimiter matching       # https://github.com/andymass/vim-matchup
+  47   │               vim-sleuth         # Auto-detects and sets indent/tab settings       # https://github.com/tpope/vim-sleuth
+  48   │               vim-repeat         # Repeat plugin for dot (.) support                # https://github.com/tpope/vim-repeat
+  49   │               wezterm-nvim      # GPU-accelerated cross-platform terminal emulator  # https://github.com/willothy/wezterm.nvim/
+  50   │               which-key-nvim     # Displays keybindings in popup                   # https://github.com/folke/which-key.nvim
+  53   │             lazy = [
+  54   │               lze                # lazy-loading library for Neovim               # https://github.com/BirdeeHub/lze
+  55   │               lzextras           # extra utilities for the “lze” loader          # https://github.com/BirdeeHub/lzextras

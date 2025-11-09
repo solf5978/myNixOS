@@ -1,46 +1,79 @@
-{ config, pkgs, ... }:
+{ config, colourPalette, hexHelper, pkgs, ... }:
 
+#let
+#  colourTheme = import ../colourTheme/verdantCloak.nix;
+#  colourPalette = colourTheme.colourPalette;
+#  hexHelper = hexCode: "rgb(${hexCode})";
+#in
 {
   imports = 
     [
-      ./solf5978/gitAuth.nix
+      ./configDev/gitAuth.nix
+      ./moduleHM/bashHM.nix
+      (import ./moduleHM/dunstHM.nix { inherit colourPalette hexHelper pkgs; })
+      #./moduleHM/dunstHM.nix
+      #      ./moduleHM/ewwHM
+      ./moduleHM/fcitx5HM.nix
+      ./moduleHM/fishHM.nix
+      ./moduleHM/generalHM.nix
+      ./moduleHM/hyprlandHM
+#      (./moduleHM/hyprlandHM { inherit colourPalette hexHelper; })
+      ./moduleHM/neovimHM
+      ./moduleHM/weztermHM.nix
+      ./moduleHM/wlrootsHM.nix
+      ./moduleHM/yaziHM.nix
     ];
 
   home.username = "solf5978";
   home.homeDirectory = "/home/solf5978";
   home.packages = with pkgs; [
+    # Android / Mobile Devices
+    pkgs.android-file-transfer
+    pkgs.android-tools
+    # Home Utils
+    pkgs.bat
+    pkgs.bluez
+    pkgs.dateutils
+    pkgs.duf
+    pkgs.du-dust
+    pkgs.eza
+    pkgs.fastfetch
+    pkgs.fd
+    pkgs.fzf
+    pkgs.hyperfine
+    pkgs.ripgrep
+    pkgs.rofi
+    pkgs.rr
+    pkgs.trash-cli
+    pkgs.tokei
+    pkgs.walker
+    pkgs.zoxide
+    # Browser
+    pkgs.arkenfox-userjs
+    pkgs.firefox
+    pkgs.librewolf
+    pkgs.qutebrowser
+    pkgs.vivaldi
+    pkgs.vivaldi-ffmpeg-codecs
+    # Develop
+    pkgs.jq
+    pkgs.dbeaver-bin
+#   pkgs.neovim
+    pkgs.wezterm
+    pkgs.yq
+    # Input Method
+    pkgs.bibata-cursors
+    pkgs.comixcursors.Orange
+    # MultiMedia
+    pkgs.ffmpeg
+    pkgs.mpv
+    pkgs.obs-studio
+
   ];
-  
-  wayland.windowManager.hyprland.enable = true;
-  wayland.windowManager.hyprland.systemd.enable = false;
-  wayland.windowManager.hyprland.settings = {
-    monitor = [
-      "Unknown-1, disable"
-      "HDMI-A-1, 2560x1440@60, 0x0, 1"
-      "HDMI-A-2, 2560x1440@60, -2560x0, 1"
-     # "HDMI-A-1, 2560x1440@60, 0x0, 1, bitdepth, 10, cm, auto"
-     # "HDMI-A-2, 2560x1440@60, -2560x0, 1, bitdepth, 10, cm, auto"
-      # FallBack Rule
-      " , preferred, auto, 1"
-    ];
-    exec-once = [
-      "waybar"
-      "dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
-      "systemctl --user start hyprpolkitagent"
-      # "systemctl --user enable --now hypridle.service"
-    ];
-    
-    "$mod" = "SUPER";
-    bind = [
-      "$mod, F, exec, firefox"
-      "$mod, Q, exec, kitty"
-      "$mod, W, exec, wezterm"
-      "$mod, K, killactive"
-    ];
-    debug = {
-      disable_logs = false;
-    };
-    
+
+  home.sessionVariables = { 
+    SHELL = "${pkgs.fish}/bin/fish";
   };
+  
   home.stateVersion = "25.05";
 }
