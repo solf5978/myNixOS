@@ -1,0 +1,16 @@
+name: "📚 Learning Required"
+description: Something you want to research or understand better
+labels: ["Learning Required"]
+body:
+  - type: textarea
+    id: topic
+    attributes:
+      label: Topic / Question
+      description: What do you want to learn about?
+      placeholder: e.g. how to configure flakes with home-manager
+  - type: textarea
+    id: notes
+    attributes:
+      label: Notes or resources
+      description: Add links or thoughts here.
+

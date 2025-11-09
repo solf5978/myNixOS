@@ -1,0 +1,6 @@
+blank_issues_enabled: false
+contact_links:
+  - name: 💬 Discussions
+    url: https://github.com/<your-username>/<your-repo>/discussions
+    about: Ask general questions or share tips here.
+

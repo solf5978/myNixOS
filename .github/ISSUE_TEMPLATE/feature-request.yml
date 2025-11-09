@@ -1,0 +1,23 @@
+name: "✨ Feature Request"
+description: Suggest a new feature or config idea
+labels: ["Feature Request"]
+body:
+  - type: textarea
+    id: idea
+    attributes:
+      label: Feature idea
+      description: What do you want to add or improve?
+      placeholder: e.g. integrate hyprland scratchpads or add a new theme
+    validations:
+      required: true
+  - type: textarea
+    id: reason
+    attributes:
+      label: Why
+      description: Why do you want this feature? What problem does it solve or what makes it cool?
+  - type: textarea
+    id: notes
+    attributes:
+      label: Notes or references
+      description: Add links, configs, or screenshots that inspired this idea.
+

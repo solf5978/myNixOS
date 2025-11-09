@@ -1,0 +1,20 @@
+name: "⚙️ Build Error"
+description: Something failed to build
+labels: ["Build Error"]
+body:
+  - type: input
+    id: component
+    attributes:
+      label: Which package/module failed?
+  - type: textarea
+    id: error-log
+    attributes:
+      label: Build log
+      description: Paste or link to the relevant build output.
+      render: shell
+  - type: textarea
+    id: notes
+    attributes:
+      label: Notes
+      description: Anything else you think might help.
+
