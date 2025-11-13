@@ -1,0 +1,2 @@
+require("coreLua")
+require("pluginLua")
